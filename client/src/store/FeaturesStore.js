@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import axios from "axios";
-const BaseURL = `http://localhost:9000`;
+const BaseURL = `https://plain-b-server.vercel.app`;
 
 const FeatureStore = create((set) => ({
   FeatureList: null,

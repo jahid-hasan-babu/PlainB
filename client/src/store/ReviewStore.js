@@ -1,5 +1,5 @@
 import { create } from "zustand";
-const BaseURL = `http://localhost:9000`;
+const BaseURL = `https://plain-b-server.vercel.app`;
 import Cookies from "js-cookie";
 import axios from "axios";
 

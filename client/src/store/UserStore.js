@@ -2,7 +2,7 @@ import { create } from "zustand";
 import axios from "axios";
 import { getEmail, setEmail } from "../utility/utility";
 import Cookies from "js-cookie";
-const BaseURL = `http://localhost:9000`;
+const BaseURL = `https://plain-b-server.vercel.app`;
 
 const UserStore = create((set) => ({
   isLogin: () => {
