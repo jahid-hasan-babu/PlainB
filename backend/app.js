@@ -23,12 +23,14 @@ const mongoose = require("mongoose");
 
 //Security middleware implement
 
-app.use(cors());
-// cors({
-//   origin: ["http://localhost:5174"],
-//   methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-//   credentials: true, // If you're using cookies or sessions
-// })
+app.use(
+  cors({
+    origin: ["https://plain-b-client.vercel.app"],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    credentials: true, // If you're using cookies or sessions
+  })
+);
+
 app.use(helmet());
 app.use(xss());
 app.use(hpp());
