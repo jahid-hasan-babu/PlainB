@@ -15,10 +15,14 @@ const AppNavBar = () => {
   const navigate = useNavigate();
 
   const onLogout = async () => {
-    await UserLogoutRequest();
-    sessionStorage.clear();
-    localStorage.clear();
-    navigate("/");
+    try {
+      await UserLogoutRequest();
+      sessionStorage.clear();
+      localStorage.clear();
+      navigate("/");  // Navigate to home page after logout
+    } catch (error) {
+      console.error("Logout failed:", error);  // Log any potential errors
+    }
   };
 
   useEffect(() => {
@@ -118,8 +122,8 @@ const AppNavBar = () => {
           </div>
 
           {/* Search and Buttons */}
-          <div className="d-lg-flex flex-column flex-lg-row">
-            <div className="input-group sticky-md-bottom mt-3 mt-lg-0 mb-3 mb-lg-0">
+          <div className="d-lg-flex align-items-center flex-column flex-lg-row">
+            <div className="input-group mt-3 mt-lg-0 mb-3 mb-lg-0">
               <input
                 onChange={(e) => SetSearchKeyword(e.target.value)}
                 className="form-control"
@@ -154,7 +158,7 @@ const AppNavBar = () => {
             </div>
 
             {/* Buttons for login/logout and profile */}
-            <div className="d-flex flex-column mt-3 gap-3 mt-lg-0 ms-lg-3">
+            <div className="d-flex flex-column flex-lg-row gap-3 mt-3 mt-lg-0 ms-lg-3">
               {isLogin() ? (
                 <>
                   <UserSubmitButton
@@ -171,15 +175,13 @@ const AppNavBar = () => {
                   </Link>
                 </>
               ) : (
-                <>
-                  <Link
-                    type="button"
-                    className="btn btn-success d-flex"
-                    to="/login"
-                  >
-                    Login
-                  </Link>
-                </>
+                <Link
+                  type="button"
+                  className="btn btn-success d-flex"
+                  to="/login"
+                >
+                  Login
+                </Link>
               )}
             </div>
           </div>
