@@ -18,7 +18,6 @@ const AppNavBar = () => {
     await UserLogoutRequest();
     sessionStorage.clear();
     localStorage.clear();
-    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     navigate("/");
   };
 
@@ -29,42 +28,44 @@ const AppNavBar = () => {
         await WishListRequest();
       }
     })();
-  }, [isLogin, CartListRequest, WishListRequest]);
+  }, []);
 
   return (
     <>
       <div className="container-fluid text-white p-2 bg-success">
         <div className="container">
-          <div className="row justify-content-between">
+          <div className="row justify-content-around">
             <div className="col-md-6">
               <span>
-                <span className="f-12 me-3">
+                <span className="f-12">
                   <i className="bi bi-envelope"></i> Support@PlanB.com
                 </span>
-                <span className="f-12">
-                  <i className="bi bi-phone"></i> 01774688159
+                <span className="f-12 mx-2">
+                  <i className="bi bi-envelope"></i> 01774688159
                 </span>
               </span>
             </div>
-            <div className="col-md-6 text-md-end">
-              <span className="bodySmall mx-2">
-                <i className="bi bi-whatsapp"></i>
-              </span>
-              <span className="bodySmall mx-2">
-                <i className="bi bi-youtube"></i>
-              </span>
-              <span className="bodySmall">
-                <i className="bi bi-facebook"></i>
+            <div className="col-md-6">
+              <span className="float-end">
+                <span className="bodySmal mx-2">
+                  <i className="bi bi-whatsapp"></i>
+                </span>
+                <span className="bodySmal mx-2">
+                  <i className="bi bi-youtube"></i>
+                </span>
+                <span className="bodySmal">
+                  <i className="bi bi-facebook"></i>
+                </span>
               </span>
             </div>
           </div>
         </div>
       </div>
 
-      <nav className="navbar sticky-top shadow-sm bg-white navbar-expand-lg navbar-light py-3">
+      <nav className="navbar sticky-top shadow-sm bg-white navbar-expand-lg navbar-light m-0 py-3">
         <div className="container">
           <Link className="navbar-brand" to="/">
-            <img className="img-fluid" src={Logo} alt="Logo" width="96" />
+            <img className="img-fluid" src={Logo} alt="logo" width="96px" />
           </Link>
           <button
             className="navbar-toggler"
@@ -77,92 +78,108 @@ const AppNavBar = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
+
           <div className="collapse navbar-collapse" id="nav06">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <Link className="btn btn-light ms-2 position-relative" to="/">
+            <ul className="navbar-nav mt-3 mt-lg-0 mb-3 mb-lg-0 ms-lg-3">
+              <span className="nav-item me-4">
+                <Link className="btn ms-2 btn-light position-relative" to="/">
                   <i className="bi bi-house"></i> Home
                 </Link>
-              </li>
-              <li className="nav-item">
                 <Link
-                  className="btn btn-light ms-2 position-relative"
                   to="/cart"
+                  type="button"
+                  className="btn ms-2 btn-light position-relative"
                 >
                   <i className="bi text-dark bi-bag"></i> Cart
                   <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
                     {CartCount}
                   </span>
                 </Link>
-              </li>
-              <li className="nav-item">
                 <Link
-                  className="btn btn-light ms-2 position-relative"
                   to="/wish"
+                  type="button"
+                  className="btn ms-3 ms-md-4 btn-light position-relative"
                 >
                   <i className="bi text-dark bi-heart"></i> Wish
                   <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
                     {WishCount}
                   </span>
                 </Link>
-              </li>
-              <li className="nav-item">
+
                 <Link
-                  className="btn btn-light ms-2 position-relative"
                   to="/orders"
+                  type="button"
+                  className="btn ms-3 ms-md-4 btn-light position-relative mt-2 mt-sm-0"
                 >
-                  <i className="bi text-dark bi-truck"></i> Order
+                  <i className="bi text-dark  bi-truck"></i> Order
                 </Link>
-              </li>
+              </span>
             </ul>
-            <div className="d-flex align-items-center">
-              <div className="input-group me-3">
-                <input
-                  onChange={(e) => SetSearchKeyword(e.target.value)}
-                  className="form-control"
-                  type="search"
-                  placeholder="Search..."
-                  aria-label="Search"
-                />
-                <Link
-                  to={
-                    SearchKeyword.length > 0
-                      ? `/by-keyword/${SearchKeyword}`
-                      : `/`
-                  }
-                  className="btn btn-outline-dark"
+          </div>
+
+          {/* Search and Buttons */}
+          <div className="d-lg-flex flex-column flex-lg-row">
+            <div className="input-group sticky-md-bottom mt-3 mt-lg-0 mb-3 mb-lg-0">
+              <input
+                onChange={(e) => SetSearchKeyword(e.target.value)}
+                className="form-control"
+                type="search"
+                placeholder="Search..."
+                aria-label="Search"
+              />
+              <Link
+                to={
+                  SearchKeyword.length > 0
+                    ? `/by-keyword/${SearchKeyword}`
+                    : `/`
+                }
+                className="btn btn-outline-dark"
+                type="submit"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  style={{ width: 24, height: 24 }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    style={{ width: 24, height: 24 }}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                    />
-                  </svg>
-                </Link>
-              </div>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </Link>
+            </div>
+
+            {/* Buttons for login/logout and profile */}
+            <div className="d-flex flex-column mt-3 gap-3 mt-lg-0 ms-lg-3">
               {isLogin() ? (
                 <>
                   <UserSubmitButton
                     onClick={onLogout}
                     text="Logout"
-                    className="btn btn-success me-2"
+                    className="btn btn-success d-flex"
                   />
-                  <Link type="button" className="btn btn-success" to="/profile">
+                  <Link
+                    type="button"
+                    className="btn btn-success d-flex"
+                    to="/profile"
+                  >
                     Profile
                   </Link>
                 </>
               ) : (
-                <Link type="button" className="btn btn-success" to="/login">
-                  Login
-                </Link>
+                <>
+                  <Link
+                    type="button"
+                    className="btn btn-success d-flex"
+                    to="/login"
+                  >
+                    Login
+                  </Link>
+                </>
               )}
             </div>
           </div>
