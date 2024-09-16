@@ -28,15 +28,20 @@ const UserStore = create((set) => ({
     }));
   },
 
-  UserLogoutRequest: async () => {
-    let token = Cookies.get("token");
-    set({ isFormSubmit: true });
-    let res = await axios.get(`${BaseURL}/api/v1/UserLogout`, {
-      headers: { Authorization: `Bearer ${token}` }, // Include token in headers
-    });
-    set({ isFormSubmit: false });
-    return res.data["status"] === "success";
-  },
+UserLogoutRequest: async () => {
+  let token = Cookies.get("token");
+  set({ isFormSubmit: true });
+  let res = await axios.get(`${BaseURL}/api/v1/UserLogout`, {
+    headers: { Authorization: `Bearer ${token}` }, // Include token in headers
+  });
+  set({ isFormSubmit: false });
+
+  if (res.data["status"] === "success") {
+    Cookies.remove("token");  // Remove token from cookies after successful logout
+    return true;
+  }
+  return false;
+},
 
   isFormSubmit: false,
 
