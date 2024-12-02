@@ -9,22 +9,18 @@ let sentEmailUtility = async (emailTo, emailText, emailSub) => {
     smtpTransporter({
       service: "Gmail",
       auth: {
-        user: "jahidhasanbabu657@gmail.com", // your email address
-        pass: password, // email password or app-specific password
+        user: "jahidhasanbabu657@gmail.com",
+        pass: password,
       },
     })
   );
-
-  // Mask the email in the "from" field by providing a name and the email address
   let mailOption = {
-    from: '"MERN Ecommerce Service" <jahidhasanbabu657@gmail.com>', // Masked email
+    from: "MERN Ecommerce Service <jahidhasanbabu657@gmail.com>",
     to: emailTo,
     subject: emailSub,
     text: emailText,
   };
-
   return await transporter.sendMail(mailOption);
 };
 
-module.exports = sentEmailUtility;
-
+module.exports = sentEmailUtility; 
